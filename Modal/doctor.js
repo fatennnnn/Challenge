@@ -23,10 +23,14 @@ const ItemSchema = new Schema({
     type: String,
     required: true
   },
+  image: {
+     type: String,
+    required: true
+  },
   consultation: {
-    type: Array,
-    default: []
+    type: Array
   }
+
 });
 //Contact NOM A IMPORETER DANS LA ROUTE
 module.exports = Doctor = mongoose.model("doctor", ItemSchema);

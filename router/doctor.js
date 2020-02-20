@@ -8,13 +8,14 @@ router.get("/", (req, res) => {
     .catch(err => console.log("err"));
 });
 router.post("/", (req, res) => {
-  let { name, telephone, email, adresse } = req.body;
+  let { name, telephone, email, adresse, image } = req.body;
   const newdoctor = new Doctor({
     name,
     telephone,
     email,
     adresse,
-    specialite:"generaliste"
+    specialite: "generaliste",
+    image
   });
 
   newdoctor
@@ -32,11 +33,21 @@ router.delete("/:id", (req, res) => {
 });
 // update
 router.put("/:id", (req, res) => {
-  const { name, telephone, email, adresse, specialite } = req.body;
+  const { name, telephone, email, adresse, specialite, image } = req.body;
   const { id } = req.params;
   Doctor.findOneAndUpdate(
     { _id: id },
-    { $set: { name, telephone, email, adresse, specialite } }
+    { $set: { name, telephone, email, adresse, specialite, image } }
+  )
+    .then(data => res.send(data))
+    .catch(err => console.log(err));
+});
+router.put("/consultation/:id", (req, res) => {
+  const { consultation } = req.body;
+  const { id } = req.params;
+  Doctor.findOneAndUpdate(
+    { _id: id },
+    { $set: { consultation } }
   )
     .then(data => res.send(data))
     .catch(err => console.log(err));
