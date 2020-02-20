@@ -7,14 +7,54 @@ const ItemSchema = new Schema({
     type: String,
     required: true
   },
-  telphone: {
+  telephone: {
     type: String,
     required: true
   },
   email: {
     type: String,
     required: true
+  },
+  adresse: {
+    type: String,
+    required: true
+  },
+  specialite: {
+    type: String,
+    required: true
+  },
+  consultation: {
+    type: Array,
+    default: []
   }
 });
 //Contact NOM A IMPORETER DANS LA ROUTE
-module.exports = Contact = mongoose.model("contact", ItemSchema);
+module.exports = Doctor = mongoose.model("doctor", ItemSchema);
+
+
+// {
+//         nameclient: {
+//           type: String,
+//           required: true
+//         },
+//         telephoneclient: {
+//           type: String,
+//           required: true
+//         },
+//         emailclient: {
+//           type: String
+//         },
+//         adresseclient: {
+//           type: String
+//         },
+//         date: { default: Date.now() }
+//       }
+
+
+// {
+//         "nameclient": "",
+//         "telephoneclient": "",
+//         "emailclient": "",
+//         "adresseclient": "",
+//         "date": 33
+//       }

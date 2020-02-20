@@ -1,17 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const Contact = require("../Modal/contact");
+const Doctor = require("../Modal/doctor");
 
-router.get("/get_cont", (req, res) => {
-  Contact.find()
-    .then(contacts => res.send(contacts))
+router.get("/", (req, res) => {
+  Doctor.find()
+    .then(doctors => res.send(doctors))
     .catch(err => console.log("err"));
 });
 router.post("/", (req, res) => {
-  let { name, telphone, email } = req.body;
-  const newcontact = new Contact({ name, telphone, email });
+  let { name, telephone, email, adresse } = req.body;
+  const newdoctor = new Doctor({
+    name,
+    telephone,
+    email,
+    adresse,
+    specialite:"generaliste"
+  });
 
-  newcontact
+  newdoctor
     .save()
     .then(data => res.send(data))
     .catch(err => console.log("cant added"));
@@ -20,15 +26,18 @@ router.post("/", (req, res) => {
 //delete
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
-  Contact.findOneAndDelete({ _id: id })
+  Doctor.findOneAndDelete({ _id: id })
     .then(data => res.send(data))
     .catch(err => console.log(err));
 });
 // update
 router.put("/:id", (req, res) => {
-  const { name, telphone, email } = req.body;
+  const { name, telephone, email, adresse, specialite } = req.body;
   const { id } = req.params;
-  Contact.findOneAndUpdate({ _id: id }, { $set: { name, telphone, email } })
+  Doctor.findOneAndUpdate(
+    { _id: id },
+    { $set: { name, telephone, email, adresse, specialite } }
+  )
     .then(data => res.send(data))
     .catch(err => console.log(err));
 });
